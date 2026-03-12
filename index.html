@@ -4953,7 +4953,8 @@ initCustomStickerCalculator();
 renderGiftCardDenoms();
 loadCustomerAccount();
 loadLocalProducts()
-  .catch(() => loadShopifyProducts())
+  .then(() => { renderProductGrid('homeFeatured', products.slice(0, 8)); })
+  .catch(() => loadShopifyProducts().then(() => { renderProductGrid('homeFeatured', products.slice(0, 8)); }))
   .catch(() => { /* fallback stays in place */ });
 </script>
 
