@@ -4472,6 +4472,16 @@ function toggleMobileMenu() {
   o.style.display = o.style.display==='flex'?'none':'flex';
 }
 
+// Ensure inline handlers can access these functions in all environments
+window.showPage = showPage;
+window.showCollection = showCollection;
+window.navGo = navGo;
+window.toggleNav = toggleNav;
+window.toggleMobileMenu = toggleMobileMenu;
+window.addToCartFromDetail = addToCartFromDetail;
+window.changeQty = changeQty;
+window.selectSize = selectSize;
+
 // ── MISC ─────────────────────────────────────────────────
 function subscribeNewsletter() { showToast('Thanks for subscribing! 🚗','SUBSCRIBED'); }
 function submitContact() { showToast("Message sent! We'll be in touch soon.",'MESSAGE SENT'); }
