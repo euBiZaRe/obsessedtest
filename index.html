@@ -4359,11 +4359,11 @@ function renderCart() {
     el.innerHTML = `<div class="empty-cart"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1.5" style="margin:0 auto 20px"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><h2>YOUR CART IS EMPTY</h2><p>Looks like you haven't added anything yet.</p><button class="btn btn-primary" onclick="showCollection('all')">SHOP NOW</button></div>`;
     return;
   }
-  const subtotal = cart.reduce((s,i)=>s+(i.unitPrice ?? i.product.price)*i.qty,0);
+  const subtotal = cart.reduce((s,i)=>s+(((i.unitPrice !== null && i.unitPrice !== undefined) ? i.unitPrice : i.product.price)*i.qty),0);
   const shipping = 3.99;
   const total = subtotal + shipping;
   const cartHtml = `<div class="cart-layout"><div>${cart.map(item=>{
-    const unit = item.unitPrice ?? item.product.price;
+    const unit = (item.unitPrice !== null && item.unitPrice !== undefined) ? item.unitPrice : item.product.price;
     const lineTotal = unit * item.qty;
     const optionHtml = item.options && item.options.length ? `<div class="cart-item-options">${item.options.map(o => escapeHtml(o)).join(' | ')}</div>` : '';
     return `<div class="cart-item"><div class="cart-item-img"><img src="${item.product.img}" alt="${item.product.title}"/></div><div><div class="cart-item-name">${item.product.title}</div><div class="cart-item-variant">${item.size?'Size: '+item.size+' Â· ':''}Qty: ${item.qty}</div>${optionHtml}</div><div><div class="cart-item-price">£${lineTotal.toFixed(2)}</div><span class="cart-item-remove" onclick="removeFromCart('${item.key}')">REMOVE</span></div></div>`;
