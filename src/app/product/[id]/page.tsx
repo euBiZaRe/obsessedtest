@@ -79,6 +79,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               productId={product.id}
               productName={product.name}
               price={product.price}
+              image={product.image}
             />
 
             {/* Perks */}
