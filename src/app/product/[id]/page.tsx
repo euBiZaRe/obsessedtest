@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { PRODUCTS } from "@/data/products";
 
+import AddToCartButton from "@/components/AddToCartButton";
+
 export async function generateStaticParams() {
   return PRODUCTS.map((product) => ({
     id: product.id,
@@ -87,9 +89,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <button className="flex-1 bg-accent text-black font-black py-5 rounded-sm tracking-widest flex items-center justify-center gap-2 glow hover:scale-[1.02] transition-transform">
-                <ShoppingCart size={20} /> ADD TO CART
-              </button>
+              <AddToCartButton />
             </div>
 
             {/* Perks */}

@@ -15,10 +15,10 @@ export interface Product {
 
 function getSubCategory(name: string): string {
   const n = name.toLowerCase();
+  if (n.includes("lanyard")) return "Lanyards";
   if (n.includes("hoodie")) return "Hoodies";
   if (n.includes("t-shirt") || n.includes("t shirt") || n.includes("tee")) return "T-Shirts";
   if (n.includes("coat") || n.includes("jacket") || n.includes("windbreaker")) return "Coats & Jackets";
-  if (n.includes("lanyard")) return "Lanyards";
   if (n.includes("air freshener")) return "Air Fresheners";
   if (n.includes("flight tag")) return "Flight Tags";
   if (n.includes("show plate") || n.includes("plate")) return "Show Plates";

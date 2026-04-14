@@ -109,6 +109,7 @@ button {
 .gap-6 { gap: 1.5rem !important; }
 .gap-8 { gap: 2rem !important; }
 .gap-12 { gap: 3rem !important; }
+.gap-16 { gap: 4rem !important; }
 
 .grid { display: grid !important; }
 .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
@@ -124,11 +125,13 @@ button {
   .md\:flex { display: flex !important; }
   .md\:flex-row { flex-direction: row !important; }
   .md\:hidden { display: none !important; }
+  .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
   .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
 }
 
 @media (min-width: 1024px) {
+  .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
 }
 
