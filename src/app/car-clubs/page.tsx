@@ -8,22 +8,24 @@ import { Plus } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
-function AccessoriesGrid() {
+function CarClubsGrid() {
   const searchParams = useSearchParams();
   const filter = searchParams.get("filter");
-  const [accessories, setAccessories] = useState(PRODUCTS.filter(p => p.category === "ACCESSORIES" && !p.isCarClub));
+  
+  const [clubs, setClubs] = useState(PRODUCTS.filter(p => p.isCarClub));
 
   useEffect(() => {
-    let filtered = PRODUCTS.filter(p => p.category === "ACCESSORIES" && !p.isCarClub);
+    let filtered = PRODUCTS.filter(p => p.isCarClub);
     if (filter) {
-      filtered = filtered.filter(p => p.subCategory.toLowerCase() === filter.toLowerCase());
+      // If we decide to let people filter clubs by name later
+      filtered = filtered.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
     }
-    setAccessories(filtered);
+    setClubs(filtered);
   }, [filter]);
 
   return (
     <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
-      {accessories.map((product) => (
+      {clubs.map((product) => (
         <Link href={`/product/${product.id}`} key={product.id} className="group">
           <div className="glass aspect-[4/5] relative mb-6 overflow-hidden rounded-lg">
             <div className="absolute inset-0 bg-[#0f0f0f] flex items-center justify-center p-8 group-hover:scale-110 transition-transform duration-500">
@@ -50,30 +52,30 @@ function AccessoriesGrid() {
           <p className="font-black text-lg">{product.price}</p>
         </Link>
       ))}
-      {accessories.length === 0 && (
+      {clubs.length === 0 && (
         <div className="col-span-full py-20 text-center text-muted font-bold tracking-widest uppercase">
-          No products found for this category.
+          No club merchandise found.
         </div>
       )}
     </div>
   );
 }
 
-export default function AccessoriesPage() {
+export default function CarClubsPage() {
   return (
     <main className="min-h-screen">
       <Navbar />
       <div className="pt-32 pb-12 px-6 max-w-[1440px] mx-auto text-center">
-        <h2 className="text-accent text-sm font-bold tracking-[0.3em] mb-4 uppercase">Collection</h2>
-        <h1 className="text-5xl md:text-7xl font-black tracking-tighter italic mb-8">ACCESSORIES.</h1>
+        <h2 className="text-accent text-sm font-bold tracking-[0.3em] mb-4 uppercase">Community</h2>
+        <h1 className="text-5xl md:text-7xl font-black tracking-tighter italic mb-8">CAR CLUBS.</h1>
         <p className="text-secondary max-w-2xl mx-auto mb-12">
-          The finishing touches. 3D printed parts, flight tags, and show accessories for the ultimate car build.
+          Exclusive merchandise and gear for our partnered automotive communities and car clubs.
         </p>
       </div>
 
       <section className="pb-24 px-6 max-w-[1440px] mx-auto">
         <Suspense fallback={<div className="h-96 flex items-center justify-center"><span className="text-accent tracking-widest animate-pulse">LOADING...</span></div>}>
-          <AccessoriesGrid />
+          <CarClubsGrid />
         </Suspense>
       </section>
 
@@ -94,8 +96,8 @@ export default function AccessoriesPage() {
             <ul className="space-y-4 text-secondary text-sm font-medium">
               <li><a href="/" className="hover:text-accent transition-colors block">Home</a></li>
               <li><a href="/clothing" className="hover:text-accent transition-colors block">Clothing</a></li>
-              <li><a href="/accessories" className="text-accent transition-colors block">Accessories</a></li>
-              <li><a href="/stickers" className="hover:text-accent transition-colors block">Stickers</a></li>
+              <li><a href="/accessories" className="hover:text-accent transition-colors block">Accessories</a></li>
+              <li><a href="/car-clubs" className="text-accent transition-colors block">Car Clubs</a></li>
             </ul>
           </div>
         </div>

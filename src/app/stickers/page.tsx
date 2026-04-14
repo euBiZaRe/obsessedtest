@@ -1,12 +1,68 @@
+"use client";
+
 import Navbar from "@/components/Navbar";
 import { PRODUCTS } from "@/data/products";
 import Image from "next/image";
 import Link from "next/link";
 import { Plus } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+
+function StickersGrid() {
+  const searchParams = useSearchParams();
+  const filter = searchParams.get("filter");
+  // Stickers are currently categorized under ACCESSORIES by Shopify, so we filter by subcategories
+  const stickerSubCats = ["Sunstrips", "Slap Stickers", "Die-cut", "Decals"];
+  
+  const [stickers, setStickers] = useState(PRODUCTS.filter(p => !p.isCarClub && stickerSubCats.includes(p.subCategory)));
+
+  useEffect(() => {
+    let filtered = PRODUCTS.filter(p => !p.isCarClub && stickerSubCats.includes(p.subCategory));
+    if (filter) {
+      filtered = filtered.filter(p => p.subCategory.toLowerCase() === filter.toLowerCase());
+    }
+    setStickers(filtered);
+  }, [filter]);
+
+  return (
+    <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
+      {stickers.map((product) => (
+        <Link href={`/product/${product.id}`} key={product.id} className="group">
+          <div className="glass aspect-[4/5] relative mb-6 overflow-hidden rounded-lg">
+            <div className="absolute inset-0 bg-[#0f0f0f] flex items-center justify-center p-8 group-hover:scale-110 transition-transform duration-500">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-contain p-4"
+                  unoptimized
+                />
+            </div>
+            <div className="absolute inset-x-0 bottom-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform bg-gradient-to-t from-black to-transparent z-20">
+              <button className="w-full bg-white text-black font-bold py-3 text-xs tracking-widest flex items-center justify-center gap-2 hover:bg-accent transition-colors">
+                <Plus size={16} /> QUICK ADD
+              </button>
+            </div>
+          </div>
+          <span className="text-muted text-[10px] font-bold tracking-widest mb-1 block">
+            {product.subCategory !== "Other" ? product.subCategory : product.category}
+          </span>
+          <h4 className="font-bold text-sm tracking-tight mb-2 group-hover:text-accent transition-colors">
+            {product.name}
+          </h4>
+          <p className="font-black text-lg">{product.price}</p>
+        </Link>
+      ))}
+      {stickers.length === 0 && (
+        <div className="col-span-full py-20 text-center text-muted font-bold tracking-widest uppercase">
+          No products found for this category.
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function StickersPage() {
-  const stickers = PRODUCTS.filter(p => p.category === "STICKERS");
-
   return (
     <main className="min-h-screen">
       <Navbar />
@@ -14,40 +70,14 @@ export default function StickersPage() {
         <h2 className="text-accent text-sm font-bold tracking-[0.3em] mb-4 uppercase">Collection</h2>
         <h1 className="text-5xl md:text-7xl font-black tracking-tighter italic mb-8">STICKERS & DECALS.</h1>
         <p className="text-secondary max-w-2xl mx-auto mb-12">
-          High-quality vinyl sunstrips, slap stickers, and die-cut decals. Weather-resistant and designed for enthusiasts.
+          Make your mark. Premium die-cut stickers and high-quality sunstrips designed specifically for the obsessed.
         </p>
       </div>
 
       <section className="pb-24 px-6 max-w-[1440px] mx-auto">
-        <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
-          {stickers.map((product) => (
-            <Link href={`/product/${product.id}`} key={product.id} className="group">
-              <div className="glass aspect-[4/5] relative mb-6 overflow-hidden rounded-lg">
-                <div className="absolute inset-0 bg-[#0f0f0f] flex items-center justify-center p-8 group-hover:scale-110 transition-transform duration-500">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-contain p-4"
-                      unoptimized
-                    />
-                </div>
-                <div className="absolute inset-x-0 bottom-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform bg-gradient-to-t from-black to-transparent z-20">
-                  <button className="w-full bg-white text-black font-bold py-3 text-xs tracking-widest flex items-center justify-center gap-2 hover:bg-accent transition-colors">
-                    <Plus size={16} /> QUICK ADD
-                  </button>
-                </div>
-              </div>
-              <span className="text-muted text-[10px] font-bold tracking-widest mb-1 block">
-                {product.category}
-              </span>
-              <h4 className="font-bold text-sm tracking-tight mb-2 group-hover:text-accent transition-colors">
-                {product.name}
-              </h4>
-              <p className="font-black text-lg">{product.price}</p>
-            </Link>
-          ))}
-        </div>
+        <Suspense fallback={<div className="h-96 flex items-center justify-center"><span className="text-accent tracking-widest animate-pulse">LOADING...</span></div>}>
+          <StickersGrid />
+        </Suspense>
       </section>
 
       {/* Footer */}

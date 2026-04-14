@@ -7,7 +7,7 @@ import { Plus } from "lucide-react";
 import { PRODUCTS } from "@/data/products";
 
 export default function FeaturedProducts() {
-  const featured = PRODUCTS.slice(0, 4);
+  const featured = PRODUCTS.filter(p => !p.isCarClub).slice(0, 4);
   return (
     <section className="py-24 px-6 max-w-[1440px] mx-auto">
       <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-4">

@@ -51,12 +51,13 @@ export default function Navbar() {
               
               {link.items && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 z-[100]">
-                  <div className="glass p-6 min-w-[240px] rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-accent/20">
+                  <div className="bg-[#050505]/95 backdrop-blur-xl p-6 min-w-[240px] rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.9)] border border-accent/20">
+
                     <ul className="space-y-3">
                       {link.items.map((item) => (
                         <li key={item}>
                           <Link 
-                            href={`${link.href}`} 
+                            href={`${link.href}?filter=${encodeURIComponent(item)}`} 
                             className="text-[10px] font-black tracking-[0.2em] text-secondary hover:text-accent transition-colors block py-2 uppercase border-b border-white/5 last:border-0"
                           >
                             {item}
