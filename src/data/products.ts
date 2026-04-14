@@ -36,14 +36,14 @@ function getClubName(name: string): string | undefined {
     "anti sticker sticker", "ford car club", "ford elite", "ford granada", 
     "golf iv owners", "insanity", "misguided", "modded car club", 
     "supa square", "treat your shelf", "aocd", "all wheels uk",
-    "arcane autos", "audi tt addicts", "auto society", "ayrshore",
-    "boostology", "bristol detailing", "broken spannerz", "devoted uk",
+    "arcane autos", "audi tt addicts", "auditt", "auto society", "ayrshore", "ayshore",
+    "boostology", "bristol detailing", "broken spannerz", "devoted",
     "fezgxng", "girlscargang", "guys girls & cars", "ignxtion", "insta carmunity",
     "just ford", "nefo", "notts royals", "offbranded", "official rep", "outcasted",
     "overperform", "redlined rejects", "reformed automotive", "ride revolution", 
-    "scpl", "simply static", "smkduk", "south coast tt", "southwest unelite",  
+    "scpl", "sclp", "simply static", "smkduk", "south coast tt", "southwest unelite",  
     "trvisions", "unlxcky", "united rover", "vally commandos", "wds", "xclusive auto",
-    "unique ford"
+    "unique ford", "hcc", "modified bristol"
   ];
   
   for (const club of clubs) {
