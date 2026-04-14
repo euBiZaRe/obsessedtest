@@ -58,17 +58,17 @@ export default function Navbar() {
               </Link>
               
               {link.items && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 z-[100]">
-                  <div className="bg-[#050505]/95 backdrop-blur-xl p-6 min-w-[240px] rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.9)] border border-accent/20">
-
-                    <ul className="space-y-3">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-500 z-[100] translate-y-2 group-hover:translate-y-0">
+                  <div className="relative bg-[#0a0a0a]/90 backdrop-blur-3xl p-2 min-w-[280px] rounded-2xl shadow-[0_40px_80px_rgba(0,0,0,0.9)] border border-white/10 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/10 before:to-transparent before:pointer-events-none before:rounded-2xl">
+                    <ul className="space-y-1 relative z-10">
                       {link.items.map((item) => (
                         <li key={item}>
                           <Link 
                             href={link.name === "CAR CLUBS" ? `${link.href}/${encodeURIComponent(item.toLowerCase().replace(/ /g, '-'))}` : `${link.href}?filter=${encodeURIComponent(item)}`} 
-                            className="text-[10px] font-black tracking-[0.2em] text-secondary hover:text-accent transition-colors block py-2 uppercase border-b border-white/5 last:border-0"
+                            className="group/item flex items-center justify-between text-[11px] font-bold tracking-[0.15em] text-secondary hover:text-white transition-all duration-300 py-3 px-5 rounded-xl hover:bg-white/5 uppercase hover:pl-6"
                           >
-                            {item}
+                            <span>{item}</span>
+                            <span className="text-accent opacity-0 group-hover/item:opacity-100 -translate-x-2 group-hover/item:translate-x-0 transition-all duration-300 text-sm">→</span>
                           </Link>
                         </li>
                       ))}
