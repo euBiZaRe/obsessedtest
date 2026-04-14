@@ -65,7 +65,7 @@ export default function Navbar() {
                         <li key={item}>
                           <Link 
                             href={link.name === "CAR CLUBS" ? `${link.href}/${encodeURIComponent(item.toLowerCase().replace(/ /g, '-'))}` : `${link.href}?filter=${encodeURIComponent(item)}`} 
-                            className="group/item flex items-center justify-between text-[11px] font-bold tracking-[0.15em] text-secondary hover:text-white transition-all duration-300 py-3 px-5 rounded-xl hover:bg-white/5 uppercase hover:pl-6"
+                            className="group/item flex items-center justify-between text-[11px] font-bold tracking-[0.15em] text-secondary hover:text-accent transition-all duration-300 py-3 px-5 rounded-xl hover:bg-white/5 uppercase hover:pl-6"
                           >
                             <span>{item}</span>
                             <span className="text-accent opacity-0 group-hover/item:opacity-100 -translate-x-2 group-hover/item:translate-x-0 transition-all duration-300 text-sm">→</span>
