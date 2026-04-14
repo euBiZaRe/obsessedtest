@@ -31,17 +31,26 @@ function getSubCategory(name: string): string {
 
 function getClubName(name: string): string | undefined {
   const n = name.toLowerCase();
-  if (n.includes("anti sticker sticker club")) return "Anti Sticker Sticker Club";
-  if (n.includes("ford car club uk")) return "Ford Car Club UK";
-  if (n.includes("ford granada club")) return "Ford Granada Club";
-  if (n.includes("golf iv owners club")) return "Golf IV Owners Club";
-  if (n.includes("insanity")) return "Insanity";
-  if (n.includes("misguided")) return "Misguided";
-  if (n.includes("modded car club")) return "Modded Car Club";
-  if (n.includes("supa square car club")) return "Supa Square Car Club";
-  if (n.includes("treat your shelf book club")) return "Treat Your Shelf Book Club";
-  if (n.includes("aocd")) return "AOCD";
-  if (n.includes("club") || n.match(/insanity|misguided|aocd/i)) return "Other Clubs";
+  
+  const clubs = [
+    "anti sticker sticker", "ford car club", "ford elite", "ford granada", 
+    "golf iv owners", "insanity", "misguided", "modded car club", 
+    "supa square", "treat your shelf", "aocd", "all wheels uk",
+    "arcane autos", "audi tt addicts", "auto society", "ayrshore",
+    "boostology", "bristol detailing", "broken spannerz", "devoted uk",
+    "fezgxng", "girlscargang", "guys girls & cars", "ignxtion", "insta carmunity",
+    "just ford", "nefo", "notts royals", "offbranded", "official rep", "outcasted",
+    "overperform", "redlined rejects", "reformed automotive", "ride revolution", 
+    "scpl", "simply static", "smkduk", "south coast tt", "southwest unelite",  
+    "trvisions", "unlxcky", "united rover", "vally commandos", "wds", "xclusive auto",
+    "unique ford"
+  ];
+  
+  for (const club of clubs) {
+    if (n.includes(club)) return club.split(' ').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  }
+  
+  if (n.includes("club") && !n.includes("treat your shelf")) return "Other Clubs";
   return undefined;
 }
 
@@ -54,6 +63,7 @@ function getCoreCategory(subCategory: string, originalCategory: string): string 
 
 export const PRODUCTS: Product[] = (productsData as any[]).map(p => {
   const subCat = getSubCategory(p.name);
+  const clubName = getClubName(p.name);
   return {
     id: String(p.id),
     name: p.name,
@@ -61,8 +71,8 @@ export const PRODUCTS: Product[] = (productsData as any[]).map(p => {
     category: getCoreCategory(subCat, p.category),
     image: `/obsessedtest${p.image}`,
     description: p.description,
-    isCarClub: /club|misguided|insanity|aocd/i.test(p.name),
+    isCarClub: clubName !== undefined,
     subCategory: subCat,
-    clubName: getClubName(p.name)
+    clubName: clubName
   };
 });
