@@ -33,7 +33,7 @@ export const PRODUCTS: Product[] = (productsData as any[]).map(p => ({
   name: p.name,
   price: p.price,
   category: p.category,
-  image: p.image,
+  image: `/obsessedtest${p.image}`,
   description: p.description,
   isCarClub: /club/i.test(p.name),
   subCategory: getSubCategory(p.name)

@@ -80,6 +80,15 @@ button {
   color: #000;
 }
 
+.hover\:text-accent:hover {
+  color: var(--accent) !important;
+}
+
+.hover\:bg-accent:hover {
+  background-color: var(--accent) !important;
+  color: #000 !important;
+}
+
 .glow {
   box-shadow: 0 0 20px var(--accent-glow);
 }
