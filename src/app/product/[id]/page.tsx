@@ -1,16 +1,18 @@
-"use client";
-
 import Navbar from "@/components/Navbar";
-import { motion } from "framer-motion";
 import { ShoppingCart, Star, ShieldCheck, Truck, ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { PRODUCTS } from "@/data/products";
 
-export default function ProductDetailPage() {
-  const params = useParams();
-  const product = PRODUCTS.find(p => p.id === params.id) || PRODUCTS[0];
+export async function generateStaticParams() {
+  return PRODUCTS.map((product) => ({
+    id: product.id,
+  }));
+}
+
+export default function ProductDetailPage({ params }: { params: { id: string } }) {
+  const { id } = params;
+  const product = PRODUCTS.find(p => p.id === id) || PRODUCTS[0];
 
   return (
     <main className="min-h-screen bg-bg-primary">
