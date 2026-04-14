@@ -43,7 +43,7 @@ function getClubName(name: string): string | undefined {
     "overperform", "redlined rejects", "reformed automotive", "ride revolution", 
     "scpl", "sclp", "simply static", "smkduk", "south coast tt", "southwest unelite",  
     "trvisions", "unlxcky", "united rover", "vally commandos", "wds", "xclusive auto",
-    "unique ford", "hcc", "modified bristol"
+    "unique ford", "hcc", "modified bristol", "og low", "pay my bills", "crop top drop top", "low show plate", "low mini lanyard"
   ];
   
   for (const club of clubs) {
