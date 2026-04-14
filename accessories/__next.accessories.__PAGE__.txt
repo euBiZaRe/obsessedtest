@@ -1,9 +1,9 @@
 1:"$Sreact.fragment"
 2:I[47257,["/obsessedtest/_next/static/chunks/01xlw8hd842-c.js","/obsessedtest/_next/static/chunks/0d3shmwh5_nmn.js"],"ClientPageRoot"]
-3:I[89919,["/obsessedtest/_next/static/chunks/01xlw8hd842-c.js","/obsessedtest/_next/static/chunks/0d3shmwh5_nmn.js","/obsessedtest/_next/static/chunks/0jo5w1aifv_.1.js","/obsessedtest/_next/static/chunks/07cxx5q.am0wx.js","/obsessedtest/_next/static/chunks/06jcb75cv~8o-.js"],"default"]
+3:I[89919,["/obsessedtest/_next/static/chunks/01xlw8hd842-c.js","/obsessedtest/_next/static/chunks/0d3shmwh5_nmn.js","/obsessedtest/_next/static/chunks/11axg_w2aje52.js","/obsessedtest/_next/static/chunks/0f.045x6n077h.js","/obsessedtest/_next/static/chunks/055q8~3xs7eb7.js"],"default"]
 6:I[97367,["/obsessedtest/_next/static/chunks/01xlw8hd842-c.js","/obsessedtest/_next/static/chunks/0d3shmwh5_nmn.js"],"OutletBoundary"]
 7:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/obsessedtest/_next/static/chunks/0jo5w1aifv_.1.js","async":true}],["$","script","script-1",{"src":"/obsessedtest/_next/static/chunks/07cxx5q.am0wx.js","async":true}],["$","script","script-2",{"src":"/obsessedtest/_next/static/chunks/06jcb75cv~8o-.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"tv36492b1Mae9mV06-nLS"}
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/obsessedtest/_next/static/chunks/11axg_w2aje52.js","async":true}],["$","script","script-1",{"src":"/obsessedtest/_next/static/chunks/0f.045x6n077h.js","async":true}],["$","script","script-2",{"src":"/obsessedtest/_next/static/chunks/055q8~3xs7eb7.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"k8J64TqRV5mmcdvN-GabC"}
 4:{}
 5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
 8:null
