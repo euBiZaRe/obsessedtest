@@ -9,7 +9,15 @@ const NAV_LINKS = [
   { name: "CLOTHING", href: "/clothing", items: ["Hoodies", "T-Shirts", "Coats & Jackets"] },
   { name: "ACCESSORIES", href: "/accessories", items: ["Lanyards", "Air Fresheners", "Flight Tags", "Show Plates"] },
   { name: "STICKERS", href: "/stickers", items: ["Sunstrips", "Slap Stickers", "Die-cut", "Decals"] },
-  { name: "CAR CLUBS", href: "/car-clubs" },
+  { 
+    name: "CAR CLUBS", 
+    href: "/car-clubs", 
+    items: [
+      "Anti Sticker Sticker Club", "Ford Car Club UK", "Ford Granada Club", 
+      "Golf IV Owners Club", "Insanity", "Misguided", "Modded Car Club", 
+      "Supa Square Car Club", "Treat Your Shelf Book Club", "AOCD"
+    ] 
+  },
 ];
 
 export default function Navbar() {
@@ -57,7 +65,7 @@ export default function Navbar() {
                       {link.items.map((item) => (
                         <li key={item}>
                           <Link 
-                            href={`${link.href}?filter=${encodeURIComponent(item)}`} 
+                            href={link.name === "CAR CLUBS" ? `${link.href}/${encodeURIComponent(item.toLowerCase().replace(/ /g, '-'))}` : `${link.href}?filter=${encodeURIComponent(item)}`} 
                             className="text-[10px] font-black tracking-[0.2em] text-secondary hover:text-accent transition-colors block py-2 uppercase border-b border-white/5 last:border-0"
                           >
                             {item}

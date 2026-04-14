@@ -1,67 +1,16 @@
-"use client";
-
 import Navbar from "@/components/Navbar";
 import { PRODUCTS } from "@/data/products";
 import Image from "next/image";
 import Link from "next/link";
-import { Plus } from "lucide-react";
-import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
 
-function CarClubsGrid() {
-  const searchParams = useSearchParams();
-  const filter = searchParams.get("filter");
-  
-  const [clubs, setClubs] = useState(PRODUCTS.filter(p => p.isCarClub));
+export default function CarClubsDirectory() {
+  const clubs = [
+    "Anti Sticker Sticker Club", "Ford Car Club UK", "Ford Granada Club", 
+    "Golf IV Owners Club", "Insanity", "Misguided", "Modded Car Club", 
+    "Supa Square Car Club", "Treat Your Shelf Book Club", "AOCD"
+  ];
 
-  useEffect(() => {
-    let filtered = PRODUCTS.filter(p => p.isCarClub);
-    if (filter) {
-      // If we decide to let people filter clubs by name later
-      filtered = filtered.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
-    }
-    setClubs(filtered);
-  }, [filter]);
-
-  return (
-    <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
-      {clubs.map((product) => (
-        <Link href={`/product/${product.id}`} key={product.id} className="group">
-          <div className="glass aspect-[4/5] relative mb-6 overflow-hidden rounded-lg">
-            <div className="absolute inset-0 bg-[#0f0f0f] flex items-center justify-center p-8 group-hover:scale-110 transition-transform duration-500">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  className="object-contain p-4"
-                  unoptimized
-                />
-            </div>
-            <div className="absolute inset-x-0 bottom-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform bg-gradient-to-t from-black to-transparent z-20">
-              <button className="w-full bg-white text-black font-bold py-3 text-xs tracking-widest flex items-center justify-center gap-2 hover:bg-accent transition-colors">
-                <Plus size={16} /> QUICK ADD
-              </button>
-            </div>
-          </div>
-          <span className="text-muted text-[10px] font-bold tracking-widest mb-1 block">
-            {product.subCategory !== "Other" ? product.subCategory : product.category}
-          </span>
-          <h4 className="font-bold text-sm tracking-tight mb-2 group-hover:text-accent transition-colors">
-            {product.name}
-          </h4>
-          <p className="font-black text-lg">{product.price}</p>
-        </Link>
-      ))}
-      {clubs.length === 0 && (
-        <div className="col-span-full py-20 text-center text-muted font-bold tracking-widest uppercase">
-          No club merchandise found.
-        </div>
-      )}
-    </div>
-  );
-}
-
-export default function CarClubsPage() {
   return (
     <main className="min-h-screen">
       <Navbar />
@@ -74,9 +23,36 @@ export default function CarClubsPage() {
       </div>
 
       <section className="pb-24 px-6 max-w-[1440px] mx-auto">
-        <Suspense fallback={<div className="h-96 flex items-center justify-center"><span className="text-accent tracking-widest animate-pulse">LOADING...</span></div>}>
-          <CarClubsGrid />
-        </Suspense>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {clubs.map((club) => {
+            const slug = encodeURIComponent(club.toLowerCase().replace(/ /g, '-'));
+            // Find a product image from the club to use as a cover
+            const clubProduct = PRODUCTS.find(p => p.clubName === club);
+            const coverImage = clubProduct ? clubProduct.image : "/obsessedtest/images/hero.png";
+
+            return (
+              <Link href={`/car-clubs/${slug}`} key={club} className="group relative h-64 overflow-hidden rounded-lg glass cursor-pointer block">
+                <div className="absolute inset-0 bg-zinc-900 group-hover:scale-110 transition-transform duration-700">
+                  <Image 
+                    src={coverImage} 
+                    alt={club} 
+                    fill 
+                    className="object-cover opacity-40 group-hover:opacity-60 transition-opacity" 
+                    unoptimized
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-8 flexitems-center justify-between">
+                  <div>
+                    <span className="text-accent text-[10px] font-black tracking-[0.2em] mb-2 block">OFFICIAL PARTNER</span>
+                    <h4 className="text-2xl font-black tracking-tighter italic">{club}</h4>
+                  </div>
+                  <ArrowRight className="text-white opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                </div>
+              </Link>
+            )
+          })}
+        </div>
       </section>
 
       {/* Footer */}

@@ -1,0 +1,93 @@
+import Navbar from "@/components/Navbar";
+import { PRODUCTS } from "@/data/products";
+import Image from "next/image";
+import Link from "next/link";
+import { Plus } from "lucide-react";
+
+export function generateStaticParams() {
+  const clubs = [
+    "Anti Sticker Sticker Club", "Ford Car Club UK", "Ford Granada Club", 
+    "Golf IV Owners Club", "Insanity", "Misguided", "Modded Car Club", 
+    "Supa Square Car Club", "Treat Your Shelf Book Club", "AOCD"
+  ];
+  return clubs.map(club => ({ club: encodeURIComponent(club.toLowerCase().replace(/ /g, '-')) }));
+}
+
+export default function IndividualCarClubPage({ params }: { params: { club: string } }) {
+  const originalClubNames = [
+    "Anti Sticker Sticker Club", "Ford Car Club UK", "Ford Granada Club", 
+    "Golf IV Owners Club", "Insanity", "Misguided", "Modded Car Club", 
+    "Supa Square Car Club", "Treat Your Shelf Book Club", "AOCD"
+  ];
+  const targetClubSlug = decodeURIComponent(params.club);
+  const matchedClubName = originalClubNames.find(c => c.toLowerCase().replace(/ /g, '-') === targetClubSlug) || "Other Clubs";
+  
+  const clubProducts = PRODUCTS.filter(p => p.clubName === matchedClubName);
+
+  return (
+    <main className="min-h-screen">
+      <Navbar />
+      <div className="pt-32 pb-12 px-6 max-w-[1440px] mx-auto text-center">
+        <Link href="/car-clubs" className="text-accent text-sm font-bold tracking-[0.3em] mb-8 uppercase flex items-center justify-center gap-2 hover:text-white transition-colors">
+          ← BACK TO COMMUNITIES
+        </Link>
+        <h1 className="text-5xl md:text-7xl font-black tracking-tighter italic mb-8 uppercase">{matchedClubName}</h1>
+        <p className="text-secondary max-w-2xl mx-auto mb-12">
+          Exclusive official merchandise for the {matchedClubName} community.
+        </p>
+      </div>
+
+      <section className="pb-24 px-6 max-w-[1440px] mx-auto">
+        <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
+          {clubProducts.map((product) => (
+            <Link href={`/product/${product.id}`} key={product.id} className="group">
+              <div className="glass aspect-[4/5] relative mb-6 overflow-hidden rounded-lg">
+                <div className="absolute inset-0 bg-[#0f0f0f] flex items-center justify-center p-8 group-hover:scale-110 transition-transform duration-500">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-contain p-4"
+                      unoptimized
+                    />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform bg-gradient-to-t from-black to-transparent z-20">
+                  <button className="w-full bg-white text-black font-bold py-3 text-xs tracking-widest flex items-center justify-center gap-2 hover:bg-accent transition-colors">
+                    <Plus size={16} /> QUICK ADD
+                  </button>
+                </div>
+              </div>
+              <span className="text-muted text-[10px] font-bold tracking-widest mb-1 block">
+                {product.subCategory !== "Other" ? product.subCategory : product.category}
+              </span>
+              <h4 className="font-bold text-sm tracking-tight mb-2 group-hover:text-accent transition-colors">
+                {product.name}
+              </h4>
+              <p className="font-black text-lg">{product.price}</p>
+            </Link>
+          ))}
+          {clubProducts.length === 0 && (
+            <div className="col-span-full py-20 text-center text-muted font-bold tracking-widest uppercase">
+              No products found for this club.
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-24 px-6 border-t border-glass-border bg-bg-primary">
+         <div className="max-w-[1440px] mx-auto grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem' }}>
+          <div style={{ gridColumn: 'span 2' }}>
+             <div className="text-2xl font-bold tracking-tighter flex items-center gap-2 mb-6 text-white">
+              <span className="bg-accent text-black px-2 py-1 rounded-sm rotate-[-2deg]">OBSESSED</span>
+              <span>BRAND</span>
+            </div>
+            <p className="text-secondary max-w-sm mb-8">
+              Redefining automotive enthusiast culture. Quality apparel and accessories for those who are obsessed with the drive.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </main>
+  );
+}

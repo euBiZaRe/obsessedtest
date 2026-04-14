@@ -10,6 +10,7 @@ export interface Product {
   description?: string;
   isCarClub: boolean;
   subCategory: string;
+  clubName?: string;
 }
 
 function getSubCategory(name: string): string {
@@ -22,10 +23,26 @@ function getSubCategory(name: string): string {
   if (n.includes("flight tag")) return "Flight Tags";
   if (n.includes("show plate") || n.includes("plate")) return "Show Plates";
   if (n.includes("sunstrip")) return "Sunstrips";
-  if (n.includes("slap")) return "Slap Stickers";
+  if (n.includes("slap") || n.includes("anti sticker")) return "Slap Stickers";
   if (n.includes("die-cut") || n.includes("die cut")) return "Die-cut";
   if (n.includes("decal") || n.includes("sticker")) return "Decals";
   return "Other";
+}
+
+function getClubName(name: string): string | undefined {
+  const n = name.toLowerCase();
+  if (n.includes("anti sticker sticker club")) return "Anti Sticker Sticker Club";
+  if (n.includes("ford car club uk")) return "Ford Car Club UK";
+  if (n.includes("ford granada club")) return "Ford Granada Club";
+  if (n.includes("golf iv owners club")) return "Golf IV Owners Club";
+  if (n.includes("insanity")) return "Insanity";
+  if (n.includes("misguided")) return "Misguided";
+  if (n.includes("modded car club")) return "Modded Car Club";
+  if (n.includes("supa square car club")) return "Supa Square Car Club";
+  if (n.includes("treat your shelf book club")) return "Treat Your Shelf Book Club";
+  if (n.includes("aocd")) return "AOCD";
+  if (n.includes("club") || n.match(/insanity|misguided|aocd/i)) return "Other Clubs";
+  return undefined;
 }
 
 export const PRODUCTS: Product[] = (productsData as any[]).map(p => ({
@@ -35,7 +52,8 @@ export const PRODUCTS: Product[] = (productsData as any[]).map(p => ({
   category: p.category,
   image: `/obsessedtest${p.image}`,
   description: p.description,
-  isCarClub: /club/i.test(p.name),
-  subCategory: getSubCategory(p.name)
+  isCarClub: /club|misguided|insanity|aocd/i.test(p.name),
+  subCategory: getSubCategory(p.name),
+  clubName: getClubName(p.name)
 }));
 
