@@ -15,6 +15,6 @@ export const PRODUCTS: Product[] = (productsData as any[]).map(p => ({
   name: p.name,
   price: p.price,
   category: p.category,
-  image: `/obsessedtest${p.image}`,
+  image: p.image,
   description: p.description
 }));
