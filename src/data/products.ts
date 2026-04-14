@@ -19,13 +19,11 @@ function getSubCategory(name: string): string {
   if (n.includes("hoodie")) return "Hoodies";
   if (n.includes("t-shirt") || n.includes("t shirt") || n.includes("tee")) return "T-Shirts";
   if (n.includes("coat") || n.includes("jacket") || n.includes("windbreaker")) return "Coats & Jackets";
-  if (n.includes("air freshener")) return "Air Fresheners";
-  if (n.includes("flight tag")) return "Flight Tags";
+  if (n.includes("fresh")) return "Air Fresheners";
+  if (n.includes("tag")) return "Flight Tags";
   if (n.includes("show plate") || n.includes("plate")) return "Show Plates";
   if (n.includes("sunstrip")) return "Sunstrips";
-  if (n.includes("slap") || n.includes("anti sticker")) return "Slap Stickers";
-  if (n.includes("die-cut") || n.includes("die cut")) return "Die-cut";
-  if (n.includes("decal") || n.includes("sticker")) return "Decals";
+  if (n.includes("slap") || n.includes("anti sticker") || n.includes("die-cut") || n.includes("die cut") || n.includes("decal") || n.includes("sticker") || n.includes("vinyl")) return "Slap Stickers & Vinyls";
   return "Other";
 }
 
@@ -43,7 +41,8 @@ function getClubName(name: string): string | undefined {
     "overperform", "redlined rejects", "reformed automotive", "ride revolution", 
     "scpl", "sclp", "simply static", "smkduk", "south coast tt", "southwest unelite",  
     "trvisions", "unlxcky", "united rover", "vally commandos", "wds", "xclusive auto",
-    "unique ford", "hcc", "modified bristol", "og low", "pay my bills", "crop top drop top", "low show plate", "low mini lanyard"
+    "unique ford", "hcc", "modified bristol", "og low", "pay my bills", "crop top drop top", "low show plate", "low mini lanyard",
+    "distorted", "your girlfriend follows", "your boyfriend follows", "rep application form"
   ];
   
   for (const club of clubs) {
@@ -56,7 +55,7 @@ function getClubName(name: string): string | undefined {
 
 function getCoreCategory(subCategory: string, originalCategory: string): string {
   if (["Hoodies", "T-Shirts", "Coats & Jackets"].includes(subCategory)) return "CLOTHING";
-  if (["Sunstrips", "Slap Stickers", "Die-cut", "Decals"].includes(subCategory)) return "STICKERS";
+  if (["Sunstrips", "Slap Stickers & Vinyls"].includes(subCategory)) return "STICKERS";
   if (["Lanyards", "Air Fresheners", "Flight Tags", "Show Plates"].includes(subCategory)) return "ACCESSORIES";
   return originalCategory;
 }

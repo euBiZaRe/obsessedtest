@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PRODUCTS } from "@/data/products";
 
-import AddToCartButton from "@/components/AddToCartButton";
+import ProductClientActions from "@/components/ProductClientActions";
 
 export async function generateStaticParams() {
   return PRODUCTS.map((product) => ({
@@ -73,24 +73,12 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               </p>
             )}
 
-            {/* Size Selector */}
-            {product.category === "CLOTHING" && (
-              <div className="mb-10">
-                <h3 className="text-xs font-black tracking-widest uppercase mb-4">Select Size</h3>
-                <div className="flex gap-3">
-                  {['S', 'M', 'L', 'XL', '2XL'].map(size => (
-                    <button key={size} className="w-14 h-14 border border-glass-border flex items-center justify-center font-bold hover:bg-accent hover:text-black transition-all rounded-sm hover:-translate-y-1">
-                      {size}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Actions */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <AddToCartButton />
-            </div>
+            <ProductClientActions 
+              isClothing={product.category === "CLOTHING"} 
+              productId={product.id}
+              productName={product.name}
+              price={product.price}
+            />
 
             {/* Perks */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 border-t border-glass-border">

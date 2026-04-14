@@ -12,7 +12,7 @@ function StickersGrid() {
   const searchParams = useSearchParams();
   const filter = searchParams.get("filter");
   // Stickers are currently categorized under ACCESSORIES by Shopify, so we filter by subcategories
-  const stickerSubCats = ["Sunstrips", "Slap Stickers", "Die-cut", "Decals"];
+  const stickerSubCats = ["Sunstrips", "Slap Stickers & Vinyls"];
   
   const [stickers, setStickers] = useState(PRODUCTS.filter(p => !p.isCarClub && stickerSubCats.includes(p.subCategory)));
 

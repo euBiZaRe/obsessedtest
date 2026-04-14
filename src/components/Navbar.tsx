@@ -8,28 +8,33 @@ import { ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
 const NAV_LINKS = [
   { name: "CLOTHING", href: "/clothing", items: ["Hoodies", "T-Shirts", "Coats & Jackets"] },
   { name: "ACCESSORIES", href: "/accessories", items: ["Lanyards", "Air Fresheners", "Flight Tags", "Show Plates"] },
-  { name: "STICKERS", href: "/stickers", items: ["Sunstrips", "Slap Stickers", "Die-cut", "Decals"] },
-  { 
-    name: "CAR CLUBS", 
-    href: "/car-clubs", 
-    items: [
-      "Anti Sticker Sticker Club", "Ford Car Club UK", "Ford Granada Club", 
-      "Golf IV Owners Club", "Insanity", "Misguided", "Modded Car Club", 
-      "Supa Square Car Club", "Treat Your Shelf Book Club", "AOCD"
-    ] 
-  },
+  { name: "STICKERS", href: "/stickers", items: ["Sunstrips", "Slap Stickers & Vinyls"] },
+  { name: "CAR CLUBS", href: "/car-clubs" },
 ];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    // Process Cart Update
+    const parseCartCount = () => {
+      try {
+        const cart = JSON.parse(localStorage.getItem("obsessed_cart") || "[]");
+        setCartCount(cart.reduce((acc: number, item: any) => acc + item.quantity, 0));
+      } catch (e) { }
+    };
+    parseCartCount();
+    window.addEventListener("cart-updated", parseCartCount);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("cart-updated", parseCartCount);
+    };
   }, []);
 
   return (
@@ -85,7 +90,7 @@ export default function Navbar() {
           <button className="relative p-2 glass p-2 rounded-full glass-hover transition-all">
             <ShoppingCart size={20} />
             <span className="absolute -top-1 -right-1 bg-accent text-black text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
-              0
+              {cartCount}
             </span>
           </button>
           
