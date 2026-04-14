@@ -13,13 +13,14 @@ export function generateStaticParams() {
   return clubs.map(club => ({ club: encodeURIComponent(club.toLowerCase().replace(/ /g, '-')) }));
 }
 
-export default function IndividualCarClubPage({ params }: { params: { club: string } }) {
+export default async function IndividualCarClubPage({ params }: { params: Promise<{ club: string }> }) {
   const originalClubNames = [
     "Anti Sticker Sticker Club", "Ford Car Club UK", "Ford Granada Club", 
     "Golf IV Owners Club", "Insanity", "Misguided", "Modded Car Club", 
     "Supa Square Car Club", "Treat Your Shelf Book Club", "AOCD"
   ];
-  const targetClubSlug = decodeURIComponent(params.club);
+  const { club } = await params;
+  const targetClubSlug = decodeURIComponent(club);
   const matchedClubName = originalClubNames.find(c => c.toLowerCase().replace(/ /g, '-') === targetClubSlug) || "Other Clubs";
   
   const clubProducts = PRODUCTS.filter(p => p.clubName === matchedClubName);
