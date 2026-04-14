@@ -45,15 +45,24 @@ function getClubName(name: string): string | undefined {
   return undefined;
 }
 
-export const PRODUCTS: Product[] = (productsData as any[]).map(p => ({
-  id: String(p.id),
-  name: p.name,
-  price: p.price,
-  category: p.category,
-  image: `/obsessedtest${p.image}`,
-  description: p.description,
-  isCarClub: /club|misguided|insanity|aocd/i.test(p.name),
-  subCategory: getSubCategory(p.name),
-  clubName: getClubName(p.name)
-}));
+function getCoreCategory(subCategory: string, originalCategory: string): string {
+  if (["Hoodies", "T-Shirts", "Coats & Jackets"].includes(subCategory)) return "CLOTHING";
+  if (["Sunstrips", "Slap Stickers", "Die-cut", "Decals"].includes(subCategory)) return "STICKERS";
+  if (["Lanyards", "Air Fresheners", "Flight Tags", "Show Plates"].includes(subCategory)) return "ACCESSORIES";
+  return originalCategory;
+}
 
+export const PRODUCTS: Product[] = (productsData as any[]).map(p => {
+  const subCat = getSubCategory(p.name);
+  return {
+    id: String(p.id),
+    name: p.name,
+    price: p.price,
+    category: getCoreCategory(subCat, p.category),
+    image: `/obsessedtest${p.image}`,
+    description: p.description,
+    isCarClub: /club|misguided|insanity|aocd/i.test(p.name),
+    subCategory: subCat,
+    clubName: getClubName(p.name)
+  };
+});
