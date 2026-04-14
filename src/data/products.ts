@@ -10,11 +10,11 @@ export interface Product {
   description?: string;
 }
 
-export const PRODUCTS: Product[] = productsData.map(p => ({
-  id: p.id,
+export const PRODUCTS: Product[] = (productsData as any[]).map(p => ({
+  id: String(p.id),
   name: p.name,
   price: p.price,
   category: p.category,
-  image: p.image,
+  image: `/obsessedtest${p.image}`,
   description: p.description
 }));
