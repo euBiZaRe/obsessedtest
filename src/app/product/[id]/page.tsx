@@ -60,21 +60,30 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               </div>
             </div>
 
-            <p className="text-secondary mb-12 leading-relaxed max-w-lg text-lg">
-              {product.description || "The For The Love Of Cars Hoodies are 310gsm of pure comfort. They come with our latest logo intertwined with cherry blossom flowers on the back and our signature raised font Obsessed Brand logo on the front."}
-            </p>
+            {product.description ? (
+              <div 
+                className="text-secondary mb-12 leading-relaxed max-w-lg text-lg product-description"
+                dangerouslySetInnerHTML={{ __html: product.description }}
+              />
+            ) : (
+              <p className="text-secondary mb-12 leading-relaxed max-w-lg text-lg">
+                The For The Love Of Cars Hoodies are 310gsm of pure comfort. They come with our latest logo intertwined with cherry blossom flowers on the back and our signature raised font Obsessed Brand logo on the front.
+              </p>
+            )}
 
             {/* Size Selector */}
-            <div className="mb-10">
-              <h3 className="text-xs font-black tracking-widest uppercase mb-4">Select Size</h3>
-              <div className="flex gap-3">
-                {['S', 'M', 'L', 'XL', '2XL'].map(size => (
-                  <button key={size} className="w-14 h-14 border border-glass-border flex items-center justify-center font-bold hover:bg-accent hover:text-black transition-all rounded-sm">
-                    {size}
-                  </button>
-                ))}
+            {product.category === "CLOTHING" && (
+              <div className="mb-10">
+                <h3 className="text-xs font-black tracking-widest uppercase mb-4">Select Size</h3>
+                <div className="flex gap-3">
+                  {['S', 'M', 'L', 'XL', '2XL'].map(size => (
+                    <button key={size} className="w-14 h-14 border border-glass-border flex items-center justify-center font-bold hover:bg-accent hover:text-black transition-all rounded-sm hover:-translate-y-1">
+                      {size}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
