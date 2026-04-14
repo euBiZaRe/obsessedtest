@@ -31,12 +31,12 @@ function getClubName(name: string): string | undefined {
   const n = name.toLowerCase();
   
   const clubs = [
-    "anti sticker sticker", "ford car club", "ford elite", "ford granada", 
+    "anti sticker sticker", "ford car club", "ford elite", "ford fair", "ford granada", 
     "golf iv owners", "insanity", "misguided", "modded car club", 
     "supa square", "treat your shelf", "aocd", "all wheels uk",
     "arcane autos", "audi tt addicts", "auditt", "auto society", "ayrshore", "ayshore",
     "boostology", "bristol detailing", "broken spannerz", "devoted",
-    "fezgxng", "girlscargang", "guys girls & cars", "ignxtion", "insta carmunity",
+    "fezgxng", "fez", "girlscargang", "guys girls & cars", "ignxtion", "insta carmunity",
     "just ford", "nefo", "notts royals", "offbranded", "official rep", "outcasted",
     "overperform", "redlined rejects", "reformed automotive", "ride revolution", 
     "scpl", "sclp", "simply static", "smkduk", "south coast tt", "southwest unelite",  
