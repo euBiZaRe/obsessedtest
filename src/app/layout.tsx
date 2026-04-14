@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   description: "Redefining automotive enthusiast culture. For the love of cars.",
 };
 
+import { CartProvider } from "@/context/CartContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,7 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
-        {children}
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

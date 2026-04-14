@@ -1,11 +1,11 @@
-"use client";
-
 import { ShoppingCart, Check } from "lucide-react";
 import { useState } from "react";
+import { useCart, CartItem } from "@/context/CartContext";
 
-export default function ProductClientActions({ isClothing, productId, productName, price }: { isClothing: boolean, productId: string, productName: string, price: string }) {
+export default function ProductClientActions({ isClothing, productId, productName, price, image }: { isClothing: boolean, productId: string, productName: string, price: string, image: string }) {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [added, setAdded] = useState(false);
+  const { addItem } = useCart();
 
   const handleAddToCart = () => {
     if (isClothing && !selectedSize) {
@@ -13,14 +13,16 @@ export default function ProductClientActions({ isClothing, productId, productNam
       return;
     }
 
-    // Add to localStorage Cart
-    const currentCart = JSON.parse(localStorage.getItem("obsessed_cart") || "[]");
-    currentCart.push({ id: productId, name: productName, price, size: selectedSize || "One Size", quantity: 1 });
-    localStorage.setItem("obsessed_cart", JSON.stringify(currentCart));
+    const item: CartItem = {
+      id: productId,
+      name: productName,
+      price,
+      image,
+      size: selectedSize || undefined,
+      quantity: 1
+    };
 
-    // Dispatch event to update Navbar count
-    window.dispatchEvent(new Event("cart-updated"));
-
+    addItem(item);
     setAdded(true);
     setTimeout(() => setAdded(false), 2500);
   };

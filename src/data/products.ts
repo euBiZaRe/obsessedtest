@@ -68,7 +68,7 @@ export const PRODUCTS: Product[] = (productsData as any[]).map(p => {
     name: p.name,
     price: p.price,
     category: getCoreCategory(subCat, p.category),
-    image: `/obsessedtest${p.image}`,
+    image: p.image.startsWith('/images') ? `/obsessedtest${p.image}` : p.image,
     description: p.description,
     isCarClub: clubName !== undefined,
     subCategory: subCat,

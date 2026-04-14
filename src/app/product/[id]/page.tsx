@@ -20,15 +20,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
     <main className="min-h-screen bg-bg-primary">
       <Navbar />
       
-      <div className="pt-32 pb-24 px-6 max-w-[1440px] mx-auto">
-        <Link href="/" className="flex items-center gap-2 text-muted hover:text-accent font-bold text-xs tracking-widest mb-12 transition-colors">
+      <div className="pt-48 pb-24 px-6 max-w-[1440px] mx-auto">
+        <Link href="/" className="flex items-center gap-2 text-muted hover:text-accent font-bold text-xs tracking-[0.2em] mb-20 transition-colors uppercase">
           <ChevronLeft size={16} /> BACK TO SHOP
         </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           {/* Image Gallery */}
-          <div className="space-y-6">
-            <div className="glass aspect-square relative overflow-hidden rounded-xl bg-[#0a0a0a] w-full min-h-[500px]">
+          <div className="space-y-6 relative">
+            <div className="absolute -inset-20 bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
+            <div className="glass aspect-square relative overflow-hidden rounded-xl bg-[#0a0a0a] w-full min-h-[500px] border-white/5 shadow-2xl relative z-10">
                <Image 
                   src={product.image} 
                   alt={product.name}
